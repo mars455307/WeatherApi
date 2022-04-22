@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +19,18 @@ public class MainActivity2 extends AppCompatActivity {
         getSupportActionBar().hide();
         initView();
 
-        Intent intent = getIntent();
-        String startTime = intent.getStringExtra("startTime");
-        String endTime = intent.getStringExtra("endTime");
-        String parameterName = intent.getStringExtra("parameterName");
-        String parameterUnit = intent.getStringExtra("parameterUnit");
+        Bundle bundle = getIntent().getExtras();
+        Log.e("TTTEEESSSS",bundle.toString());
+
+
+
+        String startTime = bundle.getString("startTime");
+        String endTime = bundle.getString("endTime");
+        String parameterName = bundle.getString("parameterName");
+        String parameterUnit = bundle.getString("parameterUnit");
 
         textView.setText(startTime+ "\n" + endTime + "\n" + parameterName + parameterUnit);
+
     }
 
     private void initView() {

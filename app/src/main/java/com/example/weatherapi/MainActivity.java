@@ -179,10 +179,20 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                    intent.putExtra("startTime",startTime);
-                    intent.putExtra("endTime",endTime);
-                    intent.putExtra("parameterName",parameterName);
-                    intent.putExtra("parameterUnit",parameterUnit);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("startTime",startTime);
+                    bundle.putString("endTime",endTime);
+                    bundle.putString("parameterName",parameterName);
+                    bundle.putString("parameterUnit",parameterUnit);
+
+                    intent.putExtras(bundle);
+
+//                    intent.putExtra("startTime",startTime);
+//                    intent.putExtra("endTime",endTime);
+//                    intent.putExtra("parameterName",parameterName);
+//                    intent.putExtra("parameterUnit",parameterUnit);
+
+                    
                     v.getContext().startActivity(intent);
                 }
             });
