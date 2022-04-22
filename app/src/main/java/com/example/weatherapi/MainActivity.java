@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<model> arrayList = new ArrayList<>();
     Handler handler = new Handler();
-    private Boolean checkStart = true;
 
     private static final String FILE_NAME = "personal_settings";
     private static final String SP_KEY_FIRST_RUN = "APP_FIRST_RUN";
@@ -56,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
-        checkAppFirstRun();
         initView();
+        checkAppFirstRun();
         new getData().start();
     }
 
@@ -93,13 +92,15 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject records = jsonObject.getJSONObject("records");
                     JSONArray location = records.getJSONArray("location");
 
-                    for (int i = 0 ; i < location.length() ; i++) {
+                    int i,j,k;
+
+                    for (i = 0 ; i < location.length() ; i++) {
                         JSONObject data = location.getJSONObject(i);
                         JSONArray weatherElement = data.getJSONArray("weatherElement");
-                        for (int j = 0 ; j < weatherElement.length() ; j++) {
+                        for (j = 0 ; j < weatherElement.length() ; j++) {
                             JSONObject data1 = weatherElement.getJSONObject(j);
                             JSONArray time = data1.getJSONArray("time");
-                            for (int k = 0; k < time.length(); k++) {
+                            for (k = 0; k < time.length(); k++) {
                                 JSONObject data3 = time.getJSONObject(k);
                                 String startTime = data3.getString("startTime");
                                 String endTime = data3.getString("endTime");
@@ -140,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
         private ArrayList<model> arrayList;
 
-
         public RecyclerAdapter(ArrayList<model> arrayList) {
             this.arrayList = arrayList;
         }
@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         @NonNull
         @Override
         public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            //這個寫法可以讓RecyclerView的顯示置中
             View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
             return new ViewHolder(inflate);
         }
